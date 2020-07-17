@@ -5,7 +5,6 @@
 <body>
 <button type="button">Click Me2!</button>
 
-
 <style type='text/css'>
 	.embeddedServiceHelpButton .helpButton .uiButton {
 		background-color: #3665f3;
@@ -22,8 +21,9 @@
 </style>
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" ></script>
+
 <script type='text/javascript'>
-	
 	var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = 'tr'; //For example, enter 'en' or 'en-US'
@@ -93,7 +93,7 @@
 		embedded_svc.init(
 			'https://gittigidiyor--TEST.cs102.my.salesforce.com',
 			'https://test-gittigidiyor-tr.cs102.force.com',
-			'https://service.force.com',
+			gslbBaseURL,
 			'00D1j0000000QG2',
 			'GG_Embedded_Chat_Test',
 			{
@@ -106,24 +106,21 @@
 			}
 		);
 	};
-	console.log("here");
-	
-	window.embedded_svc.init();
-	
-	console.log("here2");
-	
+
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
 		s.setAttribute('src', 'https://gittigidiyor--TEST.cs102.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
-			initESW('https://service.force.com');
+			initESW(null);
 		};
 		document.body.appendChild(s);
 	} else {
-		initESW('https://service.force.com').;
+		initESW('https://service.force.com');
 	}
 
-
+$("uiButton").click(function(){
+    $('.helpButtonEnabled').trigger("click");
+});
 	
 	
 </script>
