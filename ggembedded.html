@@ -20,14 +20,9 @@
 	}
 </style>
 
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'>
-
-</script>
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
-
-	start('https://service.force.com');
-	
-	function start(gslbBaseURL) {
+	var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = 'tr'; //For example, enter 'en' or 'en-US'
 
@@ -108,7 +103,19 @@
 				isOfflineSupportEnabled: false
 			}
 		);
+	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://gittigidiyor--TEST.cs102.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
 	}
+
 
 	
 	
