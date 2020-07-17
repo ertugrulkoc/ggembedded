@@ -3,7 +3,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">		
 	</head>
 <body>
-<button type="button">Click Me!</button>
+<button type="button">Click Me2!</button>
 
 
 <style type='text/css'>
@@ -93,7 +93,7 @@
 		embedded_svc.init(
 			'https://gittigidiyor--TEST.cs102.my.salesforce.com',
 			'https://test-gittigidiyor-tr.cs102.force.com',
-			gslbBaseURL,
+			'https://service.force.com',
 			'00D1j0000000QG2',
 			'GG_Embedded_Chat_Test',
 			{
@@ -108,9 +108,9 @@
 	};
 	console.log("here");
 	
-    	$("uiButton").click(function(){
-    $('.helpButtonEnabled').trigger("click");
-});
+	window.embedded_svc.init();
+	
+	console.log("here2");
 	
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
@@ -120,7 +120,7 @@
 		};
 		document.body.appendChild(s);
 	} else {
-		initESW('https://service.force.com');
+		initESW('https://service.force.com').;
 	}
 
 
