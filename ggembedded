@@ -4,19 +4,31 @@
 	</head>
 <body>
 
+
 <style type='text/css'>
 	.embeddedServiceHelpButton .helpButton .uiButton {
-		background-color: #005290;
-		font-family: "Arial", sans-serif;
+		background-color: #3665f3;
+		font-family: "Salesforce Sans", sans-serif;
 	}
 	.embeddedServiceHelpButton .helpButton .uiButton:focus {
-		outline: 1px solid #005290;
+		outline: 1px solid #3665f3;
+	}
+	@font-face {
+		font-family: 'Salesforce Sans';
+		src: url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.woff') format('woff'),
+		url('https://c1.sfdcstatic.com/etc/clientlibs/sfdc-aem-master/clientlibs_base/fonts/SalesforceSans-Regular.ttf') format('truetype');
 	}
 </style>
 
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'>
+start('https://service.force.com');
+
+</script>
 <script type='text/javascript'>
-	var initESW = function(gslbBaseURL) {
+
+	start('https://service.force.com');
+	
+	function start(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = 'tr'; //For example, enter 'en' or 'en-US'
 
@@ -28,58 +40,79 @@
 
 		// Settings for Chat
 		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
-			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
-			// Returns a valid button ID.
+		//	return "5731j0000004DEb";
 		//};
 		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Sets the auto-population of pre-chat form fields
 		//embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
 		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
+	
 
+	// TG - automatically opens post-chat URL for survey
+	
+	embedded_svc.settings.autoOpenPostChat = true;
+ 		
+	// TG - update Case		
 
-		// TG - automatically opens post-chat URL for survey
-		embedded_svc.settings.autoOpenPostChat = true;
+   //     embedded_svc.settings.extraPrechatFormDetails = [{
+ //            "label": "Case Number",
+ //             "value": "05411318",
+  //            "displayToAgent": true
+ //       }];
 
+	embedded_svc.settings.extraPrechatFormDetails = [{
+		"label":"Case ID",
+		"value":"5001j000005BKr3AAG",
+		"transcriptFields":[],
+		"displayToAgent":true
+	}];
+		
+     //   embedded_svc.settings.extraPrechatInfo = [{
+       //       "entityFieldMaps": [{
+         //       "doCreate": false,
+          //      "doFind": true,
+         //       "fieldName": "CaseNumber",
+          //      "isExactMatch": true,
+          //      "label": "Case Number"
+          //    }],
+ //         "entityName": "Case"
+   //     }];		
+
+	embedded_svc.settings.extraPrechatInfo = [{
+		"entityFieldMaps":[{
+			"isExactMatch":true,
+			"fieldName":"Id",
+			"doCreate":false,
+			"doFind":true,
+			"label":"Case ID"
+			}],
+		"entityName":"Case",
+	 	"saveToTranscript":"CaseID"
+	}];
+	
+		
+		
 		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 		embedded_svc.settings.entryFeature = 'LiveAgent';
-
-		// TG - update Case		
-		embedded_svc.settings.extraPrechatFormDetails = [{
-			"label":"Case ID",
-			"value":"5001j000005BKr3AAG",
-			"transcriptFields":[],
-			"displayToAgent":true
-		}];
-
-		embedded_svc.settings.extraPrechatInfo = [{
-			"entityFieldMaps":[{
-				"isExactMatch":true,
-				"fieldName":"Id",
-				"doCreate":false,
-				"doFind":true,
-				"label":"Case ID"
-				}],
-			"entityName":"Case",
-	 		"saveToTranscript":"CaseID"
-		}];
-
+		
 		embedded_svc.init(
 			'https://gittigidiyor--TEST.cs102.my.salesforce.com',
-			'https://test-gittigidiyor.cs102.force.com/canlidestek',
+			'https://test-gittigidiyor-tr.cs102.force.com',
 			gslbBaseURL,
 			'00D1j0000000QG2',
-			'Instant_Refund_Embedded',
+			'GG_Embedded_Chat_Test',
 			{
 				baseLiveAgentContentURL: 'https://c.la1-c1cs-cdg.salesforceliveagent.com/content',
 				deploymentId: '572b00000000APz',
-				buttonId: '5731j0000004DEg',
+				buttonId: '5731j0000004DEb',
 				baseLiveAgentURL: 'https://d.la1-c1cs-cdg.salesforceliveagent.com/chat',
-				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1j0000004CQiEAM_17270b02804',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I1j0000004CQdEAM_1723780d429',
 				isOfflineSupportEnabled: false
 			}
 		);
-	};
+	}
 
-initESW('https://service.force.com');
+	
+	
 </script>
 
 </body>
