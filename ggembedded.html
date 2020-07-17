@@ -107,7 +107,10 @@
 		);
 	};
 	console.log("here");
-    	$('.helpButtonEnabled').trigger("click");
+	
+    	$("uiButton").click(function(){
+    $('.helpButtonEnabled').trigger("click");
+});
 	
 	if (!window.embedded_svc) {
 		var s = document.createElement('script');
